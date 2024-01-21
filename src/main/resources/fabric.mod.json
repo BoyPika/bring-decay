@@ -6,8 +6,7 @@
   "name": "Bring Decay",
   "description": "This is a mod that adds decay potions!",
   "authors": [
-    "BoyPika",
-    "TimeSquared (Creator of Tulip Config)"
+    "BoyPika"
   ],
 
   "license": "GPLv3",
@@ -19,13 +18,9 @@
     ]
   },
 
-  "mixins": [
-    "bring_decay.mixins.json"
-  ],
-
   "depends": {
     "fabricloader": ">=0.11.1",
-    "fabric": ">=0.68.1+1.19.3",
-    "minecraft": ">=1.19.3"
+    "fabric": ">=0.21.0+build.407-1.16",
+    "minecraft": ">=1.16.3"
   }
 }
