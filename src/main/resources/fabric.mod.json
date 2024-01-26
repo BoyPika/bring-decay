@@ -18,6 +18,10 @@
     ]
   },
 
+  "mixins": [
+    "bring_decay.mixins.json"
+  ],
+
   "depends": {
     "fabricloader": ">=0.11.1",
     "fabric": ">=0.21.0+build.407-1.16",
