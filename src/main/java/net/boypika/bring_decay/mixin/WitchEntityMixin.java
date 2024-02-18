@@ -22,8 +22,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WitchEntity.class)
 public class WitchEntityMixin {
-    @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
-    public void attack(LivingEntity target, float pullProgress, CallbackInfo ci) {
+    @Inject(method = "shootAt", at = @At("HEAD"), cancellable = true)
+    public void shootAt(LivingEntity target, float pullProgress, CallbackInfo ci) {
         WitchEntity witchEntity = (WitchEntity) (Object) this;
         if (!witchEntity.isDrinking()) {
             Vec3d vec3d = target.getVelocity();
