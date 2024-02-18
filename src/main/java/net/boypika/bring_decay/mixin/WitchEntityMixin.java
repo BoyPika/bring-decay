@@ -16,11 +16,14 @@ import net.minecraft.potion.Potions;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WitchEntity.class)
 public class WitchEntityMixin {
-
-    public void attack(LivingEntity target, float pullProgress) {
+    @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
+    public void attack(LivingEntity target, float pullProgress, CallbackInfo ci) {
         WitchEntity witchEntity = (WitchEntity) (Object) this;
         if (!witchEntity.isDrinking()) {
             Vec3d vec3d = target.getVelocity();
@@ -35,7 +38,6 @@ public class WitchEntityMixin {
                 } else {
                     potion = Potions.REGENERATION;
                 }
-
                 witchEntity.setTarget((LivingEntity)null);
             } else if (g >= 8.0 && !target.hasStatusEffect(StatusEffects.SLOWNESS)) {
                 potion = Potions.SLOWNESS;
@@ -46,16 +48,15 @@ public class WitchEntityMixin {
             } else if (g <= 3.0 && !target.hasStatusEffect(StatusEffects.WEAKNESS) && witchEntity.getRandom().nextFloat() < 0.25F) {
                 potion = Potions.WEAKNESS;
             }
-
-            PotionEntity potionEntity = new PotionEntity(witchEntity.world, witchEntity);
+            PotionEntity potionEntity = new PotionEntity(witchEntity.getWorld(), witchEntity);
             potionEntity.setItem(PotionUtil.setPotion(new ItemStack(Items.SPLASH_POTION), potion));
             potionEntity.setPitch(potionEntity.getPitch() - -20.0F);
             potionEntity.setVelocity(d, e + g * 0.2, f, 0.75F, 8.0F);
             if (!witchEntity.isSilent()) {
-                witchEntity.world.playSound((PlayerEntity)null, witchEntity.getX(), witchEntity.getY(), witchEntity.getZ(), SoundEvents.ENTITY_WITCH_THROW, witchEntity.getSoundCategory(), 1.0F, 0.8F + witchEntity.getRandom().nextFloat() * 0.4F);
+                witchEntity.getWorld().playSound((PlayerEntity)null, witchEntity.getX(), witchEntity.getY(), witchEntity.getZ(), SoundEvents.ENTITY_WITCH_THROW, witchEntity.getSoundCategory(), 1.0F, 0.8F + witchEntity.getRandom().nextFloat() * 0.4F);
             }
-
-            witchEntity.world.spawnEntity(potionEntity);
+            witchEntity.getWorld().spawnEntity(potionEntity);
         }
+        ci.cancel();
     }
 }

@@ -1,15 +1,17 @@
 package net.boypika.bring_decay;
 
 import io.github.timecubed.tulip.TulipConfigManager;
+import net.boypika.bring_decay.potion.ModPotions;
 import net.boypika.bring_decay.util.Trades;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
-import net.boypika.bring_decay.potion.ModPotions;
+import net.minecraft.MinecraftVersion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Bring_Decay implements ModInitializer {
 
@@ -42,6 +44,9 @@ public class Bring_Decay implements ModInitializer {
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             LOGGER.info(String.valueOf(tulipInstance.getBoolean("witch_throw_wither")));
             LOGGER.info(String.valueOf(tulipInstance.getFloat("min_health_for_decay_from_witch")));
+            if (Objects.equals(MinecraftVersion.create().getName(), "1.19.3")) {
+                LOGGER.info("Minecraft Version: " + MinecraftVersion.create().getName());
+            }
         }
     }
 }
