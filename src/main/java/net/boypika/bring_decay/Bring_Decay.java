@@ -40,7 +40,7 @@ public class Bring_Decay implements ModInitializer {
         tulipInstance.load();
         ModPotions.registerPotions();
         Trades.registerTrades();
-        LOGGER.info("[1.19.3 - 1.20.4] Bring Decay Init");
+        LOGGER.info("[1.20.2 - 1.20.4] Bring Decay Init");
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             LOGGER.info(String.valueOf(tulipInstance.getBoolean("witch_throw_wither")));
             LOGGER.info(String.valueOf(tulipInstance.getFloat("min_health_for_decay_from_witch")));
