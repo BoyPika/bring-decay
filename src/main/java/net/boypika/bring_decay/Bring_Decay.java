@@ -34,6 +34,7 @@ public class Bring_Decay implements ModInitializer {
         }
         tulipInstance.saveProperty("witch_throw_wither", false);
         tulipInstance.saveProperty("min_health_for_decay_from_witch", 8.0F);
+        tulipInstance.saveProperty("brewable_decay_potion", false);
         tulipInstance.load();
         ModPotions.registerPotions();
         Trades.registerTrades();
@@ -41,6 +42,7 @@ public class Bring_Decay implements ModInitializer {
         if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
             LOGGER.info(String.valueOf(tulipInstance.getBoolean("witch_throw_wither")));
             LOGGER.info(String.valueOf(tulipInstance.getFloat("min_health_for_decay_from_witch")));
+            LOGGER.info(String.valueOf(tulipInstance.getBoolean("brewable_decay_potion")));
         }
     }
 }

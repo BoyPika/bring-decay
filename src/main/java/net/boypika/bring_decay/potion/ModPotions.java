@@ -1,8 +1,11 @@
 package net.boypika.bring_decay.potion;
 
 import net.boypika.bring_decay.Bring_Decay;
+import net.boypika.bring_decay.mixin.BrewingRecipeRegistryMixin;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.Potions;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.entity.effect.StatusEffects;
@@ -17,5 +20,8 @@ public class ModPotions {
     }
     public static void registerPotions() {
         DECAY_POTION = registerPotion("decay_potion");
+        if (Bring_Decay.tulipInstance.getBoolean("brewable_decay_potion")) {
+            BrewingRecipeRegistryMixin.invokeRegisterPotionRecipe(Potions.AWKWARD, Items.WITHER_ROSE, DECAY_POTION);
+        }
     }
 }
